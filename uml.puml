@@ -1,0 +1,20 @@
+@startuml
+
+actor User
+
+User -> FrontEndIstilahtify : Find Data
+FrontEndIstilahtify -> User : Show Data
+FrontEndIstilahtify -> Wikimediascrap : Request
+Wikimediascrap -> FrontEndIstilahtify : Response
+
+FrontEndIstilahtify -> KBBIscrap : Request
+KBBIscrap -> FrontEndIstilahtify : Response
+ 
+box "backend firebase"
+participant Wikimediascrap
+participant KBBIscrap
+end box
+
+Wikimediascrap <-> Wikipedia : scrapping
+KBBIscrap <-> KBBI : scrapping
+@enduml
