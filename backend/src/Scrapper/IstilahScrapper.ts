@@ -50,4 +50,3 @@ class IstilahScrapper {
 }
 
 export const istilahScrap = new IstilahScrapper();
-istilahScrap.findWikipedia("kerja").then(res => console.log(res)).catch(err => console.log(err))
