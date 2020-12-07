@@ -30,3 +30,5 @@ class IstilahController {
         }
     }
 }
+
+export const istilahController = new IstilahController();
