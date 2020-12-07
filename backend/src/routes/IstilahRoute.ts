@@ -7,9 +7,9 @@ class IstilahRoute {
      }
 
     public routes(): void {
-        this.router.get("/kbbi", istilahController.getKbbi)
-        this.router.get("/wikipedia", istilahController.getWiki)
+        this.router.post("/kbbi", istilahController.getKbbi)
+        this.router.post("/wikipedia", istilahController.getWiki)
     }
 }
 
-export const istilahRoute = new IstilahRoute()
+export const istilahRoute = new IstilahRoute().router
