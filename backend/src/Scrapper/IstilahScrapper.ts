@@ -6,6 +6,13 @@ interface IKBBIResponse {
   arti: Array<string>;
 }
 
+interface IWikipediaResponse {
+  title: string
+  pageid: number
+  size: number
+  snippet: string
+}
+
 class IstilahScrapper {
    async findKbbi(word: string): Promise<IKBBIResponse> {      
     return new Promise( async (resolve, reject) => {
@@ -26,8 +33,21 @@ class IstilahScrapper {
       .catch(err => reject(err))
     })
   }
+
+  async findWikipedia(word: string): Promise<IWikipediaResponse[]> {
+    return new Promise( async (resolve, reject) => {
+      try {
+        let url = `https://id.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=20&srsearch=${word}`
+        let getData = await axios.get(url)
+        let response: [] = getData.data.query.search
+        let responseItem: IWikipediaResponse[] = response.slice(0, 10)
+        resolve(responseItem)
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
 }
 
 export const istilahScrap = new IstilahScrapper();
-istilahScrap.findKbbi("kerja")
-.then(word => console.log(word)).catch(err => console.log(err))
+istilahScrap.findWikipedia("kerja").then(res => console.log(res)).catch(err => console.log(err))
