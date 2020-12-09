@@ -22,12 +22,21 @@ class IstilahScrapper {
         let $ = cheerio.load(res.data)
         let title: string = $("h2").text()
         let arti: Array<string> = []
-        $("ol").each((idx, ol) => {
+        $("ul.adjusted-par").each((idx, ol) => {
            $(ol).find("li").each((idx, li) => {
-               let currentArti: string = $(li).text().substring(6).trim()
+               let currentArti: string = $(li).text().substring(5).trim()
                arti.push(currentArti)
            })
         })
+        if(arti.length == 0){
+          $("ol").each((idx, ol) => {
+            $(ol).find("li").each((idx, li) => {
+                let currentArti: string = $(li).text().substring(5).trim()
+                arti.push(currentArti)
+            })
+         })
+        }
+
         resolve({arti: arti, title: title})
       })
       .catch(err => reject(err))
