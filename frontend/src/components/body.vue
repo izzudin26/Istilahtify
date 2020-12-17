@@ -25,19 +25,22 @@
         <v-tab>Wikipedia</v-tab>
         <v-tab>KBBI</v-tab>
       </v-tabs>
-      <WikipediaComponent :item="wikidata" />
+      <KbbiComponent :items="kbbiArti" :title="kbbiTitle" />
+      <!-- <WikipediaComponent :item="wikidata" /> -->
     </v-container>
   </div>
 </template>
 
 <script lang="ts">
 import WikipediaComponent from "@/components/wikipediaComponent.vue";
+import KbbiComponent from "@/components/kbbiComponent.vue";
 import { istilahService } from "@/WebServices/istilahServices.ts";
 
 export default {
   name: "Body",
   components: {
-    WikipediaComponent
+    // WikipediaComponent,
+    KbbiComponent
   },
   data: () => ({
     isValid: true,
@@ -58,9 +61,6 @@ export default {
           .getwiki(this.keyword)
           .then(result => {
             this.wikidata = result.data;
-            console.log(
-              this.wikidata.filter(a => a.title.includes(this.keyword))
-            );
           })
           .catch(err => {
             console.log(err);
@@ -68,10 +68,9 @@ export default {
 
         //get from kbbi
         istilahService.getKBBI(this.keyword).then(result => {
-          this.kbbiTitle = result.title;
+          this.kbbiTitle = result.data.title;
           this.kbbiArti = result.data.arti;
           this.isProcess = false;
-          console.log(this.kbbiArti);
         });
       }
     }
