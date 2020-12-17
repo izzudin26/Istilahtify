@@ -1,6 +1,7 @@
 import express, {Application} from "express"
 import {istilahRoute} from "./routes/IstilahRoute"
 import bodyParser from "body-parser"
+import cors from "cors"
 const port = process.env.PORT || 8080
 
 class ServerApp {
@@ -10,6 +11,7 @@ class ServerApp {
     }
 
     plugins(): void {
+        this.app.use(cors());
         this.app.use(bodyParser.json())
     }
 
