@@ -3,11 +3,11 @@ import axios from "axios";
 interface InterfaceResponseKbbi {
   status: number;
   message: string;
-  title: string;
   data: InterfaceData;
 }
 
 interface InterfaceData {
+  title: string;
   arti: string[];
 }
 
