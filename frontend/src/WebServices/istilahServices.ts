@@ -1,44 +1,65 @@
 import axios from "axios";
 
-interface IResponse {
+interface InterfaceResponseKbbi {
   status: number;
   message: string;
   title: string;
-  data: IData;
+  data: InterfaceData;
 }
 
-interface IData {
+interface InterfaceData {
   arti: string[];
 }
 
-class IstilahService {
-  url = "https://istilahtify.vercel.app/api/istilah";
+export interface InterfaceResponseWikipedia {
+  status: number;
+  message: string;
+  data: Wikidata[];
+}
 
-  getKBBI(word: string): Promise<IResponse> {
+interface Wikidata {
+  ns: number;
+  pageid: number;
+  size: number;
+  snippet: string;
+  timestamps: string;
+  title: string;
+  wordcount: number;
+}
+
+class IstilahService {
+  url = "https://istilahtify-ce89gogq7.vercel.app/api/istilah";
+
+  getKBBI(word: string): Promise<InterfaceResponseKbbi> {
     const data = {
       keyword: word
     };
-    return new Promise(async (resolve, reject) => {
-      try {
-        const response = await axios.post(`${this.url}/kbbi`, data);
-        resolve(response.data);
-      } catch (error) {
-        reject(error);
-      }
+    return new Promise((resolve, reject) => {
+      axios
+        .post(`${this.url}/kbbi`, data)
+        .then((result: any) => {
+          resolve(result.data);
+        })
+        .catch((err: any) => {
+          reject(err);
+        });
     });
   }
 
-  getwiki(word: string): Promise<IResponse> {
+  getwiki(word: string): Promise<InterfaceResponseWikipedia> {
     const data = {
       keyword: word
     };
-    return new Promise(async (resolve, reject) => {
-      try {
-        const response = await axios.post(`${this.url}/wikipedia`, data);
-        resolve(response.data);
-      } catch (error) {
-        reject(error);
-      }
+    return new Promise((resolve, reject) => {
+      axios
+        .post(`${this.url}/wikipedia`, data)
+        .then(response => {
+          resolve(response.data);
+        })
+        .catch(err => {
+          console.log(err);
+          reject(err);
+        });
     });
   }
 }
