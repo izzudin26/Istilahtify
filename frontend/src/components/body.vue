@@ -1,7 +1,12 @@
 <template>
   <div>
     <v-col class="mx-auto" md="8" sm="12" lg="6">
-      <v-form ref="form" v-model="isValid" lazy-validation>
+      <v-form
+        ref="form"
+        v-model="isValid"
+        lazy-validation
+        v-on:submit.prevent="callIstilah()"
+      >
         <v-text-field
           solo
           v-model="keyword"
