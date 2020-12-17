@@ -28,7 +28,7 @@ interface Wikidata {
 }
 
 class IstilahService {
-  url = "https://istilahtify-ce89gogq7.vercel.app/api/istilah";
+  url = "https://istilahtify-backend-lreuyw8md.vercel.app/api/istilah";
 
   getKBBI(word: string): Promise<InterfaceResponseKbbi> {
     const data = {
