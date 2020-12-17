@@ -21,12 +21,18 @@
       </v-form>
     </v-col>
     <v-container class="pb-10">
-      <v-tabs grow>
+      <v-tabs grow v-model="tab">
         <v-tab>Wikipedia</v-tab>
         <v-tab>KBBI</v-tab>
       </v-tabs>
-      <KbbiComponent :items="kbbiArti" :title="kbbiTitle" />
-      <!-- <WikipediaComponent :item="wikidata" /> -->
+      <v-tabs-items v-model="tab">
+        <v-tab-item>
+          <WikipediaComponent :item="wikidata" />
+        </v-tab-item>
+        <v-tab-item>
+          <KbbiComponent :items="kbbiArti" :title="kbbiTitle" />
+        </v-tab-item>
+      </v-tabs-items>
     </v-container>
   </div>
 </template>
@@ -39,10 +45,11 @@ import { istilahService } from "@/WebServices/istilahServices.ts";
 export default {
   name: "Body",
   components: {
-    // WikipediaComponent,
+    WikipediaComponent,
     KbbiComponent
   },
   data: () => ({
+    tab: null,
     isValid: true,
     isProcess: false,
     keywordRules: [(value: string) => !!value || "Kata Kunci Harus diisi"],
