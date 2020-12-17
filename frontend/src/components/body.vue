@@ -38,11 +38,12 @@
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 import WikipediaComponent from "@/components/wikipediaComponent.vue";
 import KbbiComponent from "@/components/kbbiComponent.vue";
 import { istilahService } from "@/WebServices/istilahServices.ts";
 
-export default {
+export default Vue.extend({
   name: "Body",
   components: {
     WikipediaComponent,
@@ -82,7 +83,7 @@ export default {
       }
     }
   }
-};
+});
 </script>
 
 <style>

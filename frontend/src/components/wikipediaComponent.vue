@@ -36,7 +36,9 @@
 </template>
 
 <script lang="ts">
-export default {
+import Vue from "vue";
+
+export default Vue.extend({
   name: "WikipediaComponent",
   data: () => ({
     isShowDialog: false,
@@ -53,7 +55,7 @@ export default {
       this.isShowDialog = true;
     }
   }
-};
+});
 </script>
 
 <style>
