@@ -8,24 +8,65 @@
           </v-expansion-panel-header>
           <v-expansion-panel-content>
             <span v-html="item.snippet"></span>
-            <v-btn color="primary" text>Baca Selengkapnya</v-btn>
+            <v-btn
+              color="primary"
+              text
+              @click="openWiki(item.pageid, item.title)"
+            >
+              Baca Selengkapnya
+            </v-btn>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels></transition
     >
+    <v-dialog v-model="isShowDialog" max-width="800px">
+      <v-toolbar dense class="toolbar-dialog">
+        {{ currentTitle }}
+        <v-spacer></v-spacer>
+        <v-btn text color="primary" @click="isShowDialog = !isShowDialog">
+          Tutup
+        </v-btn>
+      </v-toolbar>
+      <iframe
+        class="frameBrowser"
+        :src="`https://id.m.wikipedia.org/?curid=${currentPageId}`"
+      ></iframe>
+    </v-dialog>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: "WikipediaComponent",
+  data: () => ({
+    isShowDialog: false,
+    currentPageId: 0,
+    currentTitle: ""
+  }),
   props: {
     item: Array
+  },
+  methods: {
+    openWiki(id: number, title: string) {
+      this.currentTitle = title;
+      this.currentPageId = id;
+      this.isShowDialog = true;
+    }
   }
 };
 </script>
 
 <style>
+.toobar-dialog {
+  top: 4rem;
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+.frameBrowser {
+  height: 1000vh;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;
