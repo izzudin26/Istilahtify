@@ -1,6 +1,12 @@
 # Istilahtify
 
-## Backend
+istilahtify merupakan sebuah aplikasi web untuk pencarian istilah bahasa indonesia menggunakan sumber dari wikipedia dan KBBI
+
+visit: [istilahtify.vercel.app](https://istilahtify.vercel.app)
+
+![istilahtify](https://media.giphy.com/media/J9PCO2rVrxQcaj8sU6/giphy.gif)
+
+## Backend API
 - Request Istilah
     - method `POST`
     - Source : `KBBI` `Wikipedia`
