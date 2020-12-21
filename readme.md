@@ -4,14 +4,15 @@
 - Request Istilah
     - method `POST`
     - Source : `KBBI` `Wikipedia`
-    - url `https://istilahtify.vercel.app/api/istilah/{source}`
+    - url `https://istilahtify-backend.izzudin26.vercel.app/api/istilah/{source}`
+
     - Body
     ```json
     {
         "keyword": "String keyword"
     }
     ```
-    - Response 
+    - Response KBBI
     ```json
     {
     "status": "number",
@@ -22,5 +23,33 @@
             "String arti",
             "String arti"
         ],
+    }
+    ```
+
+    - Response Wikipedia
+    ```json
+    { 
+    "status": "number",
+    "message": "String message",
+    "data": [
+        {
+            "ns": "number",
+            "pageid": "number",
+            "size": "number",
+            "snippet": "string",
+            "timestamps": "string",
+            "title": "string",
+            "wordcount": "number"
+        },
+        {
+            "ns": "number",
+            "pageid": "number",
+            "size": "number",
+            "snippet": "string",
+            "timestamps": "string",
+            "title": "string",
+            "wordcount": "number"
+        }
+      ]
     }
     ```
